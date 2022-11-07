@@ -6,14 +6,10 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    
+    font-family:'Roboto Mono';
   }
-body{
-  background-color:red;
-}
-
   body, input, button {
-    font-family:'roboto-mono', sans-serif;
+    font-size:15px;
   }
 
   button {

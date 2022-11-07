@@ -7,7 +7,6 @@ import GlobalStyle from "./styles/global";
 function App() {
 
   return (
-
     <ThemeProvider theme={theme}>
       <ChakraProvider>
         <AppRoutes />
