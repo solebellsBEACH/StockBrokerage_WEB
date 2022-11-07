@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { Home } from "./pages";
+import { Home, NotFound404 } from "./pages";
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/*  -- */}
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>
   );
