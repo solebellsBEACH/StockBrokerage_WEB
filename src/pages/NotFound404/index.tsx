@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container } from './styles'
-
+import { Container , ErrorIcon} from './styles'
+import Icon404 from '../../assets/404_Icon.svg'
 export const NotFound404 = () => {
     return (
         <Container>
-            NotFound404
+            <ErrorIcon src={Icon404} />
         </Container>
     )
 }
