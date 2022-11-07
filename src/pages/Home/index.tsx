@@ -1,10 +1,15 @@
 import React from 'react'
-// import { Container } from './styles'
+import { Header } from '../../components'
+import { Container } from './styles'
 
 export const Home = () => {
     return (
-        <div>
-            Pagina Home
-        </div>
+        <>
+            <Header />
+            <Container>
+                Pagina Home
+            </Container>
+        </>
+
     )
 }
