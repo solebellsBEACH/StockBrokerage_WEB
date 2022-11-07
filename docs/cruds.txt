@@ -1,0 +1,12 @@
+corretora de ações =>  pequenos investidores possam tomar decisões melhores sobre seu portfólio
+Verificar 
+Preço atual;
+Preço histórico;
+Preço atual em comparação a outras ações;
+Projeção de ganhos com compra em data específica.
+
+=> compradora deseja saber o quanto teria ganhado ou perdido se tivesse investido seu dinheiro numa determinada quantidade de ações de uma empresa em alguma data no passado.
+
+npx create-react-app stock-brokerage  --template typescript
+
+​
