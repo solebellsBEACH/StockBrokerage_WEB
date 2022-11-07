@@ -1,21 +1,21 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-import { Home, NotFound404 } from "./pages";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ThemeProvider } from "styled-components";
+import { AppRoutes } from "./routes";
+import { theme } from "./styles/theme";
+import GlobalStyle from "./styles/global"; 
 
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/*  -- */}
-        <Route path="*" element={<NotFound404 />} />
-      </Routes>
-    </Router>
+
+    <ThemeProvider theme={theme}>
+      <ChakraProvider>
+        <AppRoutes />
+        <GlobalStyle />
+      </ChakraProvider>
+    </ThemeProvider>
+
+
   );
 }
 
