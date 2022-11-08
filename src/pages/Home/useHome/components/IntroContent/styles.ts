@@ -26,7 +26,7 @@ height:30rem ;
 export const ContentLeft = styled.div`
 width:20rem;
 height:30rem ;
-
+margin-top:5rem;
 h1{
     font-weight:900 ;
     font-size:20px;
