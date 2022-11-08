@@ -12,7 +12,8 @@ export const theme = {
     white: "white",
     black: "#2B2B2B",
 
-    gray1: "#B3B3B3",
-    gray2: "#696969",
-    gray3: "#3D3D3D"
+    gray1: "#DEDEDE",
+    gray2: "#B3B3B3",
+    gray3: "#696969",
+    gray4: "#3D3D3D"
 };
