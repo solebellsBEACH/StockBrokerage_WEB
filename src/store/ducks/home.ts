@@ -15,6 +15,7 @@ const INITIAL_STATE: IHomeDuckInitialState = {
     loading: false,
     error: false,
     actualPriceData: null,
+    stocks: null
 };
 
 export default function Home(state = INITIAL_STATE, action: any) {
@@ -30,6 +31,7 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 ...state,
                 loading: false,
                 error: false,
+                stocks:action.payload.bestMatches
             };
         case Types.GET_STOCKS_FAIL:
             return {

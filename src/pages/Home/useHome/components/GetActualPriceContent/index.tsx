@@ -9,12 +9,6 @@ import { theme } from '../../../../../styles/theme';
 import { SearchIcon } from '@chakra-ui/icons'
 import { Autocomplete, Option } from 'chakra-ui-simple-autocomplete';
 import { IHomeDuckInitialState } from '../../../../../types/interface';
-const options = [
-    { value: 'javascript', label: 'Javascript' },
-    { value: 'chakra', label: 'Chakra' },
-    { value: 'react', label: 'React' },
-    { value: 'css', label: 'CSS' },
-];
 
 export const GetActualPriceContent = (props: any) => {
 
@@ -22,13 +16,13 @@ export const GetActualPriceContent = (props: any) => {
     const [stock, setStock] = useState('')
     const [selectedStock, setSelectedStock] = useState('')
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
-
+    console.log(homeData)
     const stockNameOnChange = (e: string) => {
         setStock(e)
     }
 
     const handleSearch = () => {
-        dispatch(HomeActions.getActualPriceRequest({ name: stock }))
+        dispatch(HomeActions.getStocksRequest({ name: stock }))
     }
     return (
         <Container>
