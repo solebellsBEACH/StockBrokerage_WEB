@@ -1,0 +1,5 @@
+{
+    "name":"StockBrokerage_WEB",
+    "description":"Essa aplicação é um sistema para permitir que pequenos investidores possam tomar decisões melhores sobre seu portfólio de investimentos",
+    "techDescription":"Essa aplicação está sendo desenvolvida usando ReactJS e TypeScript, se estiver rodando em localhost experiment usar em seu bash o comando"
+}

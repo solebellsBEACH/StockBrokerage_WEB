@@ -1,10 +1,18 @@
 import React from 'react'
-import { Container } from './styles'
+import { Container, Content, ContentLeft } from './styles'
+import InformationJSON from './information.json'
+import { Kbd } from '@chakra-ui/react'
 
 export const IntroContent = () => {
     return (
         <Container>
-            IntroContent
+            <Content>
+                <ContentLeft>
+                    <h1>{InformationJSON.name}</h1>
+                    <h2>{InformationJSON.description}</h2>
+                    <h2>{InformationJSON.techDescription} <Kbd background='gray'>yarn cypress</Kbd></h2>
+                </ContentLeft>
+            </Content>
         </Container>
     )
 }
