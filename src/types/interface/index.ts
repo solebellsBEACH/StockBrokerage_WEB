@@ -1,5 +1,11 @@
 export interface IHomeDuckInitialState{
     loading: boolean
     error: boolean
-    data: null
+    actualPriceData: IGetActualPricePayload|null
+}
+
+export interface IGetActualPricePayload{
+    lastPrice: number
+    name: string
+    pricedAt: string
 }

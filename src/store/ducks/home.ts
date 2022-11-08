@@ -1,4 +1,4 @@
-import { IHomeDuckInitialState } from "../../types/interface";
+import { IGetActualPricePayload, IHomeDuckInitialState } from "../../types/interface";
 
 export const Types = {
     GET_ACTUAL_PRICE_REQUEST: 'GET_ACTUAL_PRICE_REQUEST',
@@ -11,7 +11,7 @@ export const Types = {
 const INITIAL_STATE: IHomeDuckInitialState = {
     loading: false,
     error: false,
-    data: null,
+    actualPriceData: null,
 };
 
 export default function Home(state = INITIAL_STATE, action: any) {
@@ -40,11 +40,12 @@ export default function Home(state = INITIAL_STATE, action: any) {
 }
 
 export const Creators = {
-    getActualPriceRequest: () => ({
+    getActualPriceRequest: (payload: { name: string }) => ({
         type: Types.GET_ACTUAL_PRICE_REQUEST,
+        payload
     }),
-    getActualPriceSuccess: () => ({
-        type: Types.GET_ACTUAL_PRICE_SUCCESS,
+    getActualPriceSuccess: (payload: IGetActualPricePayload) => ({
+        type: Types.GET_ACTUAL_PRICE_SUCCESS, payload
     }),
     getActualPriceFail: () => ({
         type: Types.GET_ACTUAL_PRICE_FAIL
