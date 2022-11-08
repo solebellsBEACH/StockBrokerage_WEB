@@ -6,6 +6,7 @@ export const Types = {
     GET_ACTUAL_PRICE_FAIL: 'GET_ACTUAL_PRICE_FAIL',
     GET_STOCKS_REQUEST: 'GET_STOCKS_REQUEST',
     GET_STOCKS_SUCCESS: 'GET_STOCKS_SUCCESS',
+    GET_STOCKS_RESET: 'GET_STOCKS_RESET',
     GET_STOCKS_FAIL: 'GET_STOCKS_FAIL'
 };
 
@@ -31,7 +32,7 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 ...state,
                 loading: false,
                 error: false,
-                stocks:action.payload.bestMatches
+                stocks: action.payload.bestMatches
             };
         case Types.GET_STOCKS_FAIL:
             return {
@@ -39,24 +40,31 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 loading: false,
                 error: true
             };
-            case Types.GET_ACTUAL_PRICE_REQUEST:
-                return {
-                    ...state,
-                    loading: true,
-                    error: false
-                };
-            case Types.GET_ACTUAL_PRICE_SUCCESS:
-                return {
-                    ...state,
-                    loading: false,
-                    error: false,
-                };
-            case Types.GET_ACTUAL_PRICE_FAIL:
-                return {
-                    ...state,
-                    loading: false,
-                    error: true
-                };
+        case Types.GET_STOCKS_RESET:
+            return {
+                ...state,
+                stocks: null
+            };
+        case Types.GET_ACTUAL_PRICE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: false
+            };
+        case Types.GET_ACTUAL_PRICE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                actualPriceData: action.payload
+            };
+        case Types.GET_ACTUAL_PRICE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: true
+            };
+
         default:
             return state;
     }
@@ -76,6 +84,9 @@ export const Creators = {
     getStocksRequest: (payload: { name: string }) => ({
         type: Types.GET_STOCKS_REQUEST,
         payload
+    }),
+    getStocksReset: () => ({
+        type: Types.GET_STOCKS_RESET
     }),
     getStocksSuccess: (payload: IGetStocksPayload) => ({
         type: Types.GET_STOCKS_SUCCESS, payload
