@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../../components'
 import { Container } from './styles'
-import { IntroContent } from './useHome/components'
+import { GetActualPriceContent, IntroContent } from './useHome/components'
 
 export const Home = () => {
     return (
@@ -9,6 +9,7 @@ export const Home = () => {
             <Header />
             <Container>
                 <IntroContent/>
+                <GetActualPriceContent/>
             </Container>
         </>
 

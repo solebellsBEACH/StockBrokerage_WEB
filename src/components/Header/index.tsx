@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, ContentLeft, ContentRight, Links, Logo, Title } from './styles'
 import EtheriumLogo from '../../assets/etherium_logo.svg'
-import { Grid, SimpleGrid, WrapItem } from '@chakra-ui/react'
+import { SimpleGrid, WrapItem } from '@chakra-ui/react'
 
 export const Header = () => {
     const links: { name: string, url: string }[] = [{ name: 'Container', url: 'home' }, { name: 'Container', url: 'home' }, { name: 'Container', url: 'home' }, { name: 'Container', url: 'home' }]
