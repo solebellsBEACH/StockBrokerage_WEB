@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { CoinsIcon, Container, Content, ContentRight, StyledAutocomplete } from './styles'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as HomeActions } from '../../../../../store/ducks/home'
 import CoinsSVG from '../../../../../assets/coins_Icon.svg'
 import InformationJSON from './information.json'
-import { Box, Button, FormControl, FormHelperText, FormLabel, Input } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Spinner } from '@chakra-ui/react';
 import { theme } from '../../../../../styles/theme';
 import { SearchIcon } from '@chakra-ui/icons'
 import { Autocomplete, Option } from 'chakra-ui-simple-autocomplete';
+import { IHomeDuckInitialState } from '../../../../../types/interface';
 const options = [
     { value: 'javascript', label: 'Javascript' },
     { value: 'chakra', label: 'Chakra' },
     { value: 'react', label: 'React' },
     { value: 'css', label: 'CSS' },
-  ];
+];
 
 export const GetActualPriceContent = (props: any) => {
 
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(HomeActions.getActualPriceRequest({ name: 'VAL' }))
-    // }, [props])
-    const [result, setResult] = useState<Option[]>([]);
+    const [stock, setStock] = useState('')
+    const [selectedStock, setSelectedStock] = useState('')
+    const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
+
+    const stockNameOnChange = (e: string) => {
+        setStock(e)
+    }
+
+    const handleSearch = () => {
+        dispatch(HomeActions.getActualPriceRequest({ name: stock }))
+    }
     return (
         <Container>
             <Content>
@@ -40,16 +48,19 @@ export const GetActualPriceContent = (props: any) => {
                             display='flex'
                             flexDirection='row'
                         >
-                            <StyledAutocomplete
-                            allowCreation={false}
-                                options={options}
-                                result={result}
-                                setResult={(options: Option[]) => setResult(options)}
-                                placeholder="Nome da ação"
-                                notFoundText='Ação não encontrada'
-                            />
-                            <Button backgroundColor={theme.templateColor3} marginLeft={2} leftIcon={<SearchIcon color='white' />} variant='solid'></Button>
+                            <Input placeholder='Nome da ação...' onChange={e => stockNameOnChange(e.target.value)} />
+                            <Button
+                                disabled={stock.length == 0}
+                                onClick={handleSearch}
+                                backgroundColor={theme.templateColor3} marginLeft={2} leftIcon={!homeData.loading ? <SearchIcon color='white' /> : <></>} variant='solid'>{homeData.loading && <Spinner color='white' />}</Button>
                         </Box>
+                        <Button
+                            width='100%'
+                            color='white'
+                            disabled={selectedStock.length == 0}
+                            backgroundColor={theme.templateColor3} marginTop={2} variant='solid'>
+                            Buscar preço atual !
+                        </Button>
                         <FormHelperText>Click no botão para realizar a consulta.</FormHelperText>
                     </FormControl>
                 </ContentRight>
