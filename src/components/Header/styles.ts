@@ -16,7 +16,7 @@ padding: 0 3vw;
 }
 `
 
-export const Title = styled.h1`
+export const Title = styled.div`
 margin:0 0.5rem;
 display:flex ;
 align-items: center;

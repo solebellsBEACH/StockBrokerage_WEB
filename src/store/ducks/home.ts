@@ -13,7 +13,9 @@ export const Types = {
     GET_HISTORY_DATA_REQUEST: 'GET_HISTORY_DATA_REQUEST',
     GET_HISTORY_DATA_FAIL: 'GET_HISTORY_DATA_FAIL',
 
-    SET_ONFOCUS_BLOCK: 'SET_ONFOCUS_BLOCK'
+    SET_ONFOCUS_BLOCK: 'SET_ONFOCUS_BLOCK',
+
+    RESET_HISTORY_DATA: 'RESET_HISTORY_DATA'
 };
 
 
@@ -24,7 +26,7 @@ const INITIAL_STATE: IHomeDuckInitialState = {
     actualPriceData: null,
     stocks: null,
     onFocusBlock: 'intro',
-    historyData:null
+    historyData: null
 };
 
 export default function Home(state = INITIAL_STATE, action: any) {
@@ -96,13 +98,19 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 ...state,
                 onFocusBlock: action.payload.block
             }
+
+        case Types.RESET_HISTORY_DATA:
+            return {
+                ...state,
+                historyData: null
+            }
         default:
             return state;
     }
 }
 
 export const Creators = {
-    getHistoryStockRequest: (payload: { symbol: string, mode: 'week' | 'monthly' | 'day'}) => ({
+    getHistoryStockRequest: (payload: { symbol: string, mode: 'week' | 'monthly' | 'day' }) => ({
         type: Types.GET_HISTORY_DATA_REQUEST,
         payload
     }),
@@ -135,7 +143,10 @@ export const Creators = {
     getStocksFail: () => ({
         type: Types.GET_STOCKS_FAIL
     }),
-    setOnFocusBlock: (payload:ISetOnFocusBlockPayload) => ({
+    setOnFocusBlock: (payload: ISetOnFocusBlockPayload) => ({
         type: Types.SET_ONFOCUS_BLOCK, payload
     }),
+    resetHistoryData: () => ({
+        type: Types.RESET_HISTORY_DATA,
+    })
 };
