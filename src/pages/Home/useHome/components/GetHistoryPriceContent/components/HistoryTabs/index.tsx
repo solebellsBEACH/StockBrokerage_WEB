@@ -45,12 +45,12 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
         }
         return arrayComponents
     }
-const handleResetProps = ()=>{
-    dispatch(HomeActions.resetHistoryData())
-    setTag(null)
-    setModeRequest(null)
-    setName('')
-}
+    const handleResetProps = () => {
+        dispatch(HomeActions.resetHistoryData())
+        setTag(null)
+        setModeRequest(null)
+        setName('')
+    }
 
     return (
         <Box
@@ -91,13 +91,16 @@ const handleResetProps = ()=>{
                 display='flex'
                 justifyContent='center'
             >
-                <List
-                    marginTop={5}
-                    display={homeData.historyData ? 'inline-block' : 'flex'}
-                    justifyContent='center'
-                    spacing={3}>
-                    {homeData.historyData && !homeData.loading ? returnItems() : <></>}
-                </List>
+                {homeData.historyData &&
+                    <List
+                        marginTop={5}
+                        display={homeData.historyData ? 'inline-block' : 'flex'}
+                        justifyContent='center'
+                        spacing={3}>
+                        {!homeData.loading ? returnItems() : <Spinner size='xl' color='white' />}
+                    </List>
+                }
+
             </Box>
             {tag && <Button
                 marginTop={4}
