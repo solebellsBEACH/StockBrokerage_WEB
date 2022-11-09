@@ -8,14 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Creators as HomeActions } from '../../../../../store/ducks/home'
 import { IHomeDuckInitialState } from '../../../../../types/interface';
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons';
-import { StockInformationsModal } from '../Modals/StockInformationsModal';
+import { FormControlContent } from './components/FormControlContent';
+import { HistoryTabs } from './components/HistoryTabs';
 
 export const GetHistoryPriceContent = () => {
     const [stock, setStock] = useState('')
     const dispatch = useDispatch();
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
     const [selectedStock, setSelectedStock] = useState('')
-    const [interval, setInterval] = useState({ init: '', final: '' })
+    console.log(selectedStock)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const blockName = 'getHistoryPrice'
 
@@ -33,10 +34,23 @@ export const GetHistoryPriceContent = () => {
         dispatch(HomeActions.getStocksReset())
     }
 
+
+
     const handleGetHistoryPrice = () => {
         // dispatch(HomeActions.getActualPriceRequest({ name: stock }))
         onOpen()
     }
+
+    const props = {
+        stock,
+        handleSearch,
+        blockName,
+        stockNameOnChange,
+        setSelectedStock,
+        selectedStock,
+        handleGetHistoryPrice
+    }
+
     return (
         <>
             {/* {selectedStock.length > 0 &&
@@ -60,87 +74,8 @@ export const GetHistoryPriceContent = () => {
                             color={theme.white}
                             backgroundColor={theme.templateColor1}
                         >
-                            <FormLabel>Pesquise o nome da ação</FormLabel>
-                            <Box
-                                display='flex'
-                                flexDirection='row'
-                            >
-                                <Input placeholder='Nome da ação...' value={stock} onChange={e => stockNameOnChange(e.target.value)} />
-                                <Button
-                                    disabled={stock.length === 0}
-                                    onClick={handleSearch}
-                                    backgroundColor={theme.templateColor5} marginLeft={2} leftIcon={!homeData.loading ? <SearchIcon color='white' /> : <></>} variant='solid'>{homeData.loading && <Spinner color='white' />}</Button>
-                            </Box>
-                            {homeData?.stocks?.length === 0 && <Box
-                                marginTop={5}
-                                marginBottom={5}
-                                fontSize={19}
-                                width='100%'
-                                fontWeight='extrabold'
-                                textAlign='center'
-                            >Nenhum registro encontrado</Box>}
-                            {homeData.onFocusBlock == blockName && homeData?.stocks &&
-                                <Button
-                                    marginTop={4}
-                                    marginBottom={2}
-                                    onClick={() => { dispatch(HomeActions.getStocksReset()) }}
-                                    w={10} h={10}
-                                    color='white'
-                                    backgroundColor={theme.templateColor3}
-                                    variant='solid'>
-                                    <CloseIcon w={15} h={15} />
-                                </Button>}
-                            {homeData.onFocusBlock == blockName && homeData.stocks && homeData?.stocks?.length > 0 &&
-                                <Box
-                                    margin={1}
-                                    padding={2}
-                                    height={300}
-                                    overflow='auto'
-                                    backgroundColor={theme.templateColor1}
-                                >
-                                    <RadioGroup onChange={setSelectedStock} value={selectedStock}>
-                                        <SimpleGrid
-                                            columns={[1]} spacing={2}
-                                        >{homeData.stocks.map((e, i) => <WrapItem key={'stocks' + i}><Radio value={e['1. symbol']}>{e['2. name']}</Radio></WrapItem>)}
-                                        </SimpleGrid>
-                                    </RadioGroup>
-                                </Box>}
-                            {selectedStock.length !== 0 &&
-                                <>
-                                    <Box
-                                        marginTop={3}
-                                        display='flex'
-                                        justifyContent='space-between'
-                                    >
-                                        <Input
-                                            size="md"
-                                            type='date'
-                                            width='49%'
-                                            onChange={e => { console.log(e) }}
-                                        />
-                                        <Input
-                                            size="md"
-                                            type='date'
-                                            width='49%'
-                                        />
+                            {selectedStock.length !== 0 ? <HistoryTabs {...props}/> : <FormControlContent {...props} />}
 
-                                    </Box>
-                                    <FormHelperText
-                                        color='white'
-                                    >Insira o intervalo que deseja procurar</FormHelperText>
-                                </>}
-
-                            <Button
-                                width='100%'
-                                color='white'
-                                onClick={handleGetHistoryPrice}
-                                disabled={selectedStock.length === 0}
-                                backgroundColor={theme.templateColor3} marginTop={2} variant='solid'>
-                                Buscar preço histórico!
-                            </Button>
-                            <FormHelperText
-                                color='white'
-                            >Click no botão para realizar a consulta.</FormHelperText>
                         </FormControl>
                     </ContentLeft>
                     <HistoryPriceIcon src={HistoryPriceSVG} />

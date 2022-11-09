@@ -29,3 +29,13 @@ export interface IGetStocksPayload {
 export interface ISetOnFocusBlockPayload {
     block: 'intro' | 'getActualPrice' | 'getHistoryPrice'
 }
+
+export interface IFormControlContentProps {
+    stock: string;
+    handleSearch: () => void;
+    blockName: string;
+    stockNameOnChange: (e: string) => void;
+    setSelectedStock: React.Dispatch<React.SetStateAction<string>>;
+    selectedStock: string;
+    handleGetHistoryPrice: () => void;
+}
