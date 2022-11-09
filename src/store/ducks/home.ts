@@ -17,6 +17,7 @@ export const Types = {
     GET_COMPARE_STOCKS_SUCCESS: 'GET_COMPARE_STOCKS_SUCCESS',
     GET_COMPARE_STOCKS_REQUEST: 'GET_COMPARE_STOCKS_REQUEST',
     GET_COMPARE_STOCKS_FAIL: 'GET_COMPARE_STOCKS_FAIL',
+    RESET_COMPARE_STOCKS_DATA: 'RESET_COMPARE_STOCKS_DATA',
 
     SET_ONFOCUS_BLOCK: 'SET_ONFOCUS_BLOCK',
 
@@ -130,6 +131,11 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 error: true
             };
 
+        case Types.RESET_COMPARE_STOCKS_DATA:
+            return {
+                ...state,
+                compareStocksData: null
+            };
         default:
             return state;
     }
@@ -184,5 +190,8 @@ export const Creators = {
     }),
     getCompareStocksFail: () => ({
         type: Types.GET_COMPARE_STOCKS_FAIL
+    }),
+    resetCompareStocksData: () => ({
+        type: Types.RESET_COMPARE_STOCKS_DATA
     }),
 };
