@@ -8,22 +8,23 @@ import { ContentButtons } from './styles'
 
 export const HistoryTabs = (props: IFormControlContentProps) => {
     const { selectedStock } = props
-    const [modeRequest, setModeRequest] = useState<'week' | "monthly" | 'day'>('week')
-    const tabs: { name: string, mode: 'week' | "monthly" | 'day' }[] = [
-        { name: 'Semanalmente', mode: 'week' },
-        { name: 'Mensalmente', mode: 'monthly' },
-        { name: 'Diariamente', mode: 'day' }
+    const [tag, setTag] = useState<'Weekly' | "Monthly" | 'Daily' | null>(null)
+    const [modeRequest, setModeRequest] = useState<'week' | "monthly" | 'day' | null>(null)
+    const tabs: { name: string, mode: 'week' | "monthly" | 'day', tag: 'Weekly' | "Monthly" | 'Daily' }[] = [
+        { name: 'Semanalmente', mode: 'week', tag: 'Weekly' },
+        { name: 'Mensalmente', mode: 'monthly', tag: 'Monthly' },
+        { name: 'Diariamente', mode: 'day', tag: 'Daily' }
     ]
     const dispatch = useDispatch();
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
 
     useEffect(() => {
-        dispatch(HomeActions.getHistoryStockRequest({ symbol: selectedStock, mode: modeRequest }))
+        if (modeRequest) dispatch(HomeActions.getHistoryStockRequest({ symbol: selectedStock, mode: modeRequest }))
     }, [modeRequest])
     // getHistoryStock
     const returnItems = () => {
-        const items: IHistoryItem[] = Object.values(homeData?.historyData?.['Weekly Time Series'])
-        const keys = Object.keys(homeData?.historyData?.['Weekly Time Series'])
+        const items: IHistoryItem[] = Object.values(homeData?.historyData?.[`${tag} Time Series`])
+        const keys = Object.keys(homeData?.historyData?.[`${tag} Time Series`])
         let i;
         const arrayComponents = []
         for (i = 0; i < 10; i++) {
@@ -64,9 +65,13 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
                 >{selectedStock}</Box>
             </Box>
             <ContentButtons>
-                {tabs.map(e => <Button
-                    onClick={() => { setModeRequest(e.mode) }}
-                    margin={1} colorScheme='blue' key={'tabs' + e.name}>{e.name}</Button>)}
+                {tabs.map(e => {
+                    return <Button
+                    onClick={() => {
+                        setTag(e.tag)
+                        setModeRequest(e.mode)
+                    }}
+                    margin={1} colorScheme='blue' key={'tabs' + e.name}>{e.name}</Button>})}
             </ContentButtons>
             <Box
                 w='100%'
@@ -78,7 +83,7 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
                     display={homeData.historyData ? 'inline-block' : 'flex'}
                     justifyContent='center'
                     spacing={3}>
-                    {homeData.historyData && !homeData.loading ? returnItems() : <Spinner size='xl' />}
+                    {homeData.historyData && !homeData.loading ? returnItems() : <></>}
                 </List>
             </Box>
         </Box>
