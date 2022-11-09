@@ -1,7 +1,5 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatHelpText, StatLabel, StatNumber, useToast } from '@chakra-ui/react';
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Creators as HomeActions } from '../../../../../../store/ducks/home'
+import { useSelector } from 'react-redux';
 import { IHomeDuckInitialState } from '../../../../../../types/interface';
 
 interface IGetActualPriceModalProps {
@@ -11,8 +9,6 @@ interface IGetActualPriceModalProps {
 }
 
 export const GetActualPriceModal = (props: IGetActualPriceModalProps) => {
-
-    const dispatch = useDispatch()
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
     const toast = useToast()
     const { isOpen, onClose } = props
