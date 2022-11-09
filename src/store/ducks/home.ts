@@ -1,4 +1,4 @@
-import { IGetActualPricePayload, IGetStocksPayload, IHomeDuckInitialState } from "../../types/interface";
+import { IGetActualPricePayload, IGetStocksPayload, IHomeDuckInitialState, ISetOnFocusBlockPayload } from "../../types/interface";
 
 export const Types = {
     GET_ACTUAL_PRICE_REQUEST: 'GET_ACTUAL_PRICE_REQUEST',
@@ -7,7 +7,8 @@ export const Types = {
     GET_STOCKS_REQUEST: 'GET_STOCKS_REQUEST',
     GET_STOCKS_SUCCESS: 'GET_STOCKS_SUCCESS',
     GET_STOCKS_RESET: 'GET_STOCKS_RESET',
-    GET_STOCKS_FAIL: 'GET_STOCKS_FAIL'
+    GET_STOCKS_FAIL: 'GET_STOCKS_FAIL',
+    SET_ONFOCUS_BLOCK: 'SET_ONFOCUS_BLOCK'
 };
 
 
@@ -16,7 +17,8 @@ const INITIAL_STATE: IHomeDuckInitialState = {
     loading: false,
     error: false,
     actualPriceData: null,
-    stocks: null
+    stocks: null,
+    onFocusBlock: 'intro'
 };
 
 export default function Home(state = INITIAL_STATE, action: any) {
@@ -64,7 +66,11 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 loading: false,
                 error: true
             };
-
+        case Types.SET_ONFOCUS_BLOCK:
+            return {
+                ...state,
+                onFocusBlock: action.payload.block
+            }
         default:
             return state;
     }
@@ -93,5 +99,8 @@ export const Creators = {
     }),
     getStocksFail: () => ({
         type: Types.GET_STOCKS_FAIL
+    }),
+    setOnFocusBlock: (payload:ISetOnFocusBlockPayload) => ({
+        type: Types.SET_ONFOCUS_BLOCK, payload
     }),
 };

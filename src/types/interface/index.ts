@@ -2,14 +2,14 @@ export interface IHomeDuckInitialState {
     loading: boolean
     error: boolean
     actualPriceData: IGetActualPricePayload | null
-    stocks: IStock[] | null
+    stocks: IStock[] | null,
+    onFocusBlock: 'intro' | 'getActualPrice' | 'getHistoryPrice'
 }
 
 export interface IGetActualPricePayload {
     lastPrice: number
     name: string
     pricedAt: string
-
 }
 
 export interface IStock {
@@ -25,4 +25,7 @@ export interface IStock {
 }
 export interface IGetStocksPayload {
     bestMatches: IStock[]
+}
+export interface ISetOnFocusBlockPayload {
+    block: 'intro' | 'getActualPrice' | 'getHistoryPrice'
 }

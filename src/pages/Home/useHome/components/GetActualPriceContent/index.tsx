@@ -13,6 +13,7 @@ import { StockInformationsModal } from '../Modals/StockInformationsModal';
 export const GetActualPriceContent = (props: any) => {
 
     const dispatch = useDispatch()
+    const blockName = 'getActualPrice'
     const [stock, setStock] = useState('')
     const [selectedStock, setSelectedStock] = useState('')
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
@@ -21,12 +22,14 @@ export const GetActualPriceContent = (props: any) => {
     const stockNameOnChange = (e: string) => {
         setStock(e)
     }
-
+    console.log(homeData)
     useEffect(() => {
         dispatch(HomeActions.getActualPriceRequest({ name: selectedStock }))
     }, [isOpen])
 
     const handleSearch = () => {
+        dispatch(HomeActions.setOnFocusBlock({ block: blockName }))
+
         setSelectedStock('')
         dispatch(HomeActions.getStocksRequest({ name: stock }))
         setStock('')
@@ -82,7 +85,7 @@ export const GetActualPriceContent = (props: any) => {
                                 fontWeight='extrabold'
                                 textAlign='center'
                             >Nenhum registro encontrado</Box>}
-                            {homeData?.stocks &&
+                            {homeData.onFocusBlock == blockName && homeData?.stocks &&
                                 <Button
                                     marginTop={4}
                                     marginBottom={2}
@@ -93,7 +96,7 @@ export const GetActualPriceContent = (props: any) => {
                                     variant='solid'>
                                     <CloseIcon w={15} h={15} />
                                 </Button>}
-                            {homeData.stocks && homeData?.stocks?.length > 0 &&
+                            {homeData.onFocusBlock == blockName && homeData.stocks && homeData?.stocks?.length > 0 &&
                                 <Box
                                     margin={1}
                                     padding={2}
