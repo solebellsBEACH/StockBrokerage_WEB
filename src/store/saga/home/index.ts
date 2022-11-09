@@ -1,4 +1,5 @@
 import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
+import { makeGetHistoryDataURL } from '../../../helpers';
 import { alphaKey, api, apiAlpha } from '../../../service/api';
 import { Creators as HomeActions, Types as HomeTypes } from '../../ducks/home';
 
@@ -36,7 +37,7 @@ function* getStocks(props: { type: string, payload: { name: string } }): any {
 function* getHistoryStock(props: { type: string, payload: { symbol: string, mode: 'week' | 'monthly' | 'day' } }): any {
   const { symbol, mode } = props.payload
   try {
-    const response = yield call(apiAlpha.get, `query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${alphaKey}`);
+    const response = yield call(apiAlpha.get, `${makeGetHistoryDataURL(mode)}${symbol}&apikey=${alphaKey}`);
     if (response.status === 200) {
       yield put(HomeActions.getHistoryStockSuccess(
         response.data

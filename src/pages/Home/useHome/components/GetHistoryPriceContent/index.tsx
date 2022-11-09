@@ -50,13 +50,6 @@ export const GetHistoryPriceContent = () => {
 
     return (
         <>
-            {/* {selectedStock.length > 0 &&
-                <StockInformationsModal
-                    stock={selectedStock}
-                    onClose={handleCloseModal}
-                    isOpen={isOpen}
-                />
-            } */}
             <Container>
                 <Content>
                     <ContentLeft>

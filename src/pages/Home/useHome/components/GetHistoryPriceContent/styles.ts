@@ -16,7 +16,7 @@ width:55%;
 display:flex;
 flex-direction: row;
 @media(max-width:1000px){
-    width:80%;
+    width:90%;
     flex-direction: column;
     align-items: center;
 }
@@ -26,8 +26,8 @@ export const ContentLeft = styled.div`
 width:65%;
 /* min-height:30rem ; */
 
-@media(max-width:900px){
-    width:70%;
+@media(max-width:1000px){
+    width:80%;
 }
 h1{
     font-weight:900 ;
