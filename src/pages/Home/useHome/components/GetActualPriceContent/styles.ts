@@ -9,6 +9,7 @@ background-color:${props => props.theme.white};
 display:flex;
 justify-content: center;
 align-items: center;
+padding-bottom: 5rem;
 
 `
 
