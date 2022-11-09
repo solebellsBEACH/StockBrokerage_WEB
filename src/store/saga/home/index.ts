@@ -33,7 +33,7 @@ function* getStocks(props: { type: string, payload: { name: string } }): any {
     yield put(HomeActions.getStocksFail());
   }
 }
-function* getHistoryStock(props: { type: string, payload: { symbol: string, mode: string } }): any {
+function* getHistoryStock(props: { type: string, payload: { symbol: string, mode: 'week' | 'monthly' | 'day' } }): any {
   const { symbol, mode } = props.payload
   try {
     const response = yield call(apiAlpha.get, `query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${alphaKey}`);

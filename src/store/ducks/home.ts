@@ -102,7 +102,7 @@ export default function Home(state = INITIAL_STATE, action: any) {
 }
 
 export const Creators = {
-    getHistoryStockRequest: (payload: { symbol: string, mode: string}) => ({
+    getHistoryStockRequest: (payload: { symbol: string, mode: 'week' | 'monthly' | 'day'}) => ({
         type: Types.GET_HISTORY_DATA_REQUEST,
         payload
     }),
