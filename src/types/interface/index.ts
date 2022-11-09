@@ -4,7 +4,8 @@ export interface IHomeDuckInitialState {
     actualPriceData: IGetActualPricePayload | null
     stocks: IStock[] | null,
     onFocusBlock: 'intro' | 'getActualPrice' | 'getHistoryPrice',
-    historyData: any|null
+    historyData: any | null
+    compareStocksData: IGetCompareStocksPayload | null
 }
 
 export interface IGetActualPricePayload {
@@ -56,4 +57,12 @@ export interface IFormControlContentProps {
     setSelectedStock: React.Dispatch<React.SetStateAction<string>>;
     selectedStock: string;
     handleGetHistoryPrice: () => void;
+}
+
+export interface IGetCompareStocksPayload {
+    lastPrices: {
+        lastPrice: number
+        name: string
+        pricedAt: string
+    }[]
 }

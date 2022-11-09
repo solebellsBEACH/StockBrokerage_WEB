@@ -1,4 +1,5 @@
-import { IGetActualPricePayload, IGetStocksPayload, IHomeDuckInitialState, ISetOnFocusBlockPayload } from "../../types/interface";
+import { Option } from "chakra-ui-simple-autocomplete";
+import { IGetActualPricePayload, IGetCompareStocksPayload, IGetStocksPayload, IHomeDuckInitialState, ISetOnFocusBlockPayload } from "../../types/interface";
 
 export const Types = {
     GET_ACTUAL_PRICE_REQUEST: 'GET_ACTUAL_PRICE_REQUEST',
@@ -13,6 +14,10 @@ export const Types = {
     GET_HISTORY_DATA_REQUEST: 'GET_HISTORY_DATA_REQUEST',
     GET_HISTORY_DATA_FAIL: 'GET_HISTORY_DATA_FAIL',
 
+    GET_COMPARE_STOCKS_SUCCESS: 'GET_COMPARE_STOCKS_SUCCESS',
+    GET_COMPARE_STOCKS_REQUEST: 'GET_COMPARE_STOCKS_REQUEST',
+    GET_COMPARE_STOCKS_FAIL: 'GET_COMPARE_STOCKS_FAIL',
+
     SET_ONFOCUS_BLOCK: 'SET_ONFOCUS_BLOCK',
 
     RESET_HISTORY_DATA: 'RESET_HISTORY_DATA'
@@ -26,7 +31,8 @@ const INITIAL_STATE: IHomeDuckInitialState = {
     actualPriceData: null,
     stocks: null,
     onFocusBlock: 'intro',
-    historyData: null
+    historyData: null,
+    compareStocksData: null
 };
 
 export default function Home(state = INITIAL_STATE, action: any) {
@@ -104,6 +110,26 @@ export default function Home(state = INITIAL_STATE, action: any) {
                 ...state,
                 historyData: null
             }
+        case Types.GET_COMPARE_STOCKS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: false
+            };
+        case Types.GET_COMPARE_STOCKS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                compareStocksData: action.payload
+            };
+        case Types.GET_COMPARE_STOCKS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: true
+            };
+
         default:
             return state;
     }
@@ -148,5 +174,15 @@ export const Creators = {
     }),
     resetHistoryData: () => ({
         type: Types.RESET_HISTORY_DATA,
-    })
+    }),
+    getCompareStocksRequest: (payload: { stocks: Option[] }) => ({
+        type: Types.GET_COMPARE_STOCKS_REQUEST,
+        payload
+    }),
+    getCompareStocksSuccess: (payload: IGetCompareStocksPayload) => ({
+        type: Types.GET_COMPARE_STOCKS_SUCCESS, payload
+    }),
+    getCompareStocksFail: () => ({
+        type: Types.GET_COMPARE_STOCKS_FAIL
+    }),
 };

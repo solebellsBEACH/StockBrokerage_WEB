@@ -1,3 +1,4 @@
+import { Option } from 'chakra-ui-simple-autocomplete';
 import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
 import { makeGetHistoryDataURL } from '../../../helpers';
 import { alphaKey, api, apiAlpha } from '../../../service/api';
@@ -50,6 +51,27 @@ function* getHistoryStock(props: { type: string, payload: { symbol: string, mode
   }
 }
 
+function* getCompareStocks(props: { type: string, payload: { stocks: Option[] } }): any {
+  const { stocks } = props.payload
+  try {
+    const response = yield call(api.get, `stocks/${'VAL'}/compare?stocksToCompare[]=VALE&stocksToCompare[]=V`);
+    if (response.status === 200) {
+      yield put(HomeActions.getCompareStocksSuccess(
+        response.data
+      ));
+    } else {
+      yield put(HomeActions.getCompareStocksFail());
+    }
+  } catch (error) {
+    yield put(HomeActions.getCompareStocksFail());
+  }
+}
+
+function* getCompareStocksWatcher() {
+  yield takeLatest(HomeTypes.GET_COMPARE_STOCKS_REQUEST, getCompareStocks);
+}
+
+
 function* getHistoryStockWatcher() {
   yield takeLatest(HomeTypes.GET_HISTORY_DATA_REQUEST, getHistoryStock);
 }
@@ -69,5 +91,6 @@ export default function* rootSagas() {
     fork(getActualPriceWatcher),
     fork(getStocksWatcher),
     fork(getHistoryStockWatcher),
+    fork(getCompareStocksWatcher),
   ]);
 }

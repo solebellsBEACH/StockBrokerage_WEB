@@ -6,12 +6,16 @@ import { Option } from 'chakra-ui-simple-autocomplete'
 import { Box, Button } from '@chakra-ui/react'
 import { theme } from '../../../../../styles/theme'
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
+import { useDispatch } from 'react-redux'
+import { Creators as HomeActions } from '../../../../../store/ducks/home'
+
 export const CompareStocksContent = () => {
 
     const stocksToCompare = [
         { label: 'V', value: 'V' }, { label: 'VAL', value: 'VAL' }, { label: 'VALE', value: 'VALE' }
     ]
     const [result, setResult] = React.useState<Option[]>([]);
+    const dispatch = useDispatch()
     return (
         <Container>
             <Content>
@@ -38,9 +42,10 @@ export const CompareStocksContent = () => {
                             }}
                         />
                         <Button
-                        width='80%'
+                            width='80%'
                             disabled={result.length < 2}
-                            marginTop={2} color='white' backgroundColor={theme.templateColor5}>Comparar ações <SearchIcon  marginLeft={30} w={20} h={20} /></Button>
+                            onClick={() => { dispatch(HomeActions.getCompareStocksRequest({ stocks: result })) }}
+                            marginTop={2} color='white' backgroundColor={theme.templateColor5}>Comparar ações <SearchIcon marginLeft={30} w={20} h={20} /></Button>
                     </Box>
                 </ContentRight>
             </Content>
