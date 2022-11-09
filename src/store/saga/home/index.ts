@@ -1,6 +1,6 @@
 import { Option } from 'chakra-ui-simple-autocomplete';
 import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
-import { makeGetHistoryDataURL } from '../../../helpers';
+import { makeGetCompareStocksURL, makeGetHistoryDataURL } from '../../../helpers';
 import { alphaKey, api, apiAlpha } from '../../../service/api';
 import { Creators as HomeActions, Types as HomeTypes } from '../../ducks/home';
 
@@ -54,7 +54,7 @@ function* getHistoryStock(props: { type: string, payload: { symbol: string, mode
 function* getCompareStocks(props: { type: string, payload: { stocks: Option[] } }): any {
   const { stocks } = props.payload
   try {
-    const response = yield call(api.get, `stocks/${'VAL'}/compare?stocksToCompare[]=VALE&stocksToCompare[]=V`);
+    const response = yield call(api.get, `stocks/${stocks[0].value}/${makeGetCompareStocksURL(stocks)}`);
     if (response.status === 200) {
       yield put(HomeActions.getCompareStocksSuccess(
         response.data
