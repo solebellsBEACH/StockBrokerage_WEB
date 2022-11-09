@@ -1,9 +1,9 @@
 import { IntroContent } from './IntroContent'
 import { GetActualPriceContent } from './GetActualPriceContent'
-import {GetActualPriceModal} from './Modals/GetActualPriceModal'
+import {StockInformationsModal} from './Modals/StockInformationsModal'
 import {GetHistoryPriceContent} from './GetHistoryPriceContent'
 export {
-    GetActualPriceModal,
+    StockInformationsModal,
     IntroContent,
     GetActualPriceContent,
     GetHistoryPriceContent

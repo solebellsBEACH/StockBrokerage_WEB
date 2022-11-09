@@ -6,9 +6,9 @@ import CoinsSVG from '../../../../../assets/coins_Icon.svg'
 import InformationJSON from './information.json'
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Radio, RadioGroup, SimpleGrid, Spinner, useDisclosure, WrapItem } from '@chakra-ui/react';
 import { theme } from '../../../../../styles/theme';
-import { SearchIcon } from '@chakra-ui/icons'
+import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import { IHomeDuckInitialState } from '../../../../../types/interface';
-import { GetActualPriceModal } from '../Modals/GetActualPriceModal';
+import { StockInformationsModal } from '../Modals/StockInformationsModal';
 
 export const GetActualPriceContent = (props: any) => {
 
@@ -32,7 +32,7 @@ export const GetActualPriceContent = (props: any) => {
         setStock('')
     }
 
-    const handleCloseModal =()=>{
+    const handleCloseModal = () => {
         onClose()
         setStock('')
         dispatch(HomeActions.getStocksReset())
@@ -44,7 +44,7 @@ export const GetActualPriceContent = (props: any) => {
     return (
         <>
             {selectedStock.length > 0 &&
-                <GetActualPriceModal
+                <StockInformationsModal
                     stock={selectedStock}
                     onClose={handleCloseModal}
                     isOpen={isOpen}
@@ -70,11 +70,11 @@ export const GetActualPriceContent = (props: any) => {
                             >
                                 <Input placeholder='Nome da ação...' value={stock} onChange={e => stockNameOnChange(e.target.value)} />
                                 <Button
-                                    disabled={stock.length == 0}
+                                    disabled={stock.length === 0}
                                     onClick={handleSearch}
                                     backgroundColor={theme.templateColor3} marginLeft={2} leftIcon={!homeData.loading ? <SearchIcon color='white' /> : <></>} variant='solid'>{homeData.loading && <Spinner color='white' />}</Button>
                             </Box>
-                            {homeData?.stocks?.length == 0 && <Box
+                            {homeData?.stocks?.length === 0 && <Box
                                 marginTop={5}
                                 marginBottom={5}
                                 fontSize={19}
@@ -82,6 +82,17 @@ export const GetActualPriceContent = (props: any) => {
                                 fontWeight='extrabold'
                                 textAlign='center'
                             >Nenhum registro encontrado</Box>}
+                            {homeData?.stocks &&
+                                <Button
+                                    marginTop={4}
+                                    marginBottom={2}
+                                    onClick={() => { dispatch(HomeActions.getStocksReset()) }}
+                                    w={10} h={10}
+                                    color='white'
+                                    backgroundColor={theme.templateColor3}
+                                    variant='solid'>
+                                    <CloseIcon w={15} h={15} />
+                                </Button>}
                             {homeData.stocks && homeData?.stocks?.length > 0 &&
                                 <Box
                                     margin={1}
@@ -101,7 +112,7 @@ export const GetActualPriceContent = (props: any) => {
                                 width='100%'
                                 color='white'
                                 onClick={handleGetActualPrice}
-                                disabled={selectedStock.length == 0}
+                                disabled={selectedStock.length === 0}
                                 backgroundColor={theme.templateColor3} marginTop={2} variant='solid'>
                                 Buscar preço atual !
                             </Button>

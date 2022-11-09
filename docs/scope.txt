@@ -1,5 +1,5 @@
-Bloco 1 => Intro com uma descrição do site e oque ele faz
-Bloco 2 => Faz o crud de verificar o preço atual da ação
+Bloco 1 => Intro com uma descrição do site e oque ele faz okay
+Bloco 2 => Faz o crud de verificar o preço atual da ação okay
 Bloco 3 => Faz o crud de verificar o preço histórico da ação
 Bloco 4 => Faz o crud de comparar o preço de duas ações
 Bloco 5 => Faz o crud de comparar a projeção de ganhos com compra em data específica
