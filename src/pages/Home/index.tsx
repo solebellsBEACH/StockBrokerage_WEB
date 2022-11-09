@@ -2,6 +2,7 @@ import React from 'react'
 import { Header } from '../../components'
 import { Container } from './styles'
 import {
+    CompareStocksContent,
     GetActualPriceContent,
     GetHistoryPriceContent,
     IntroContent
@@ -15,6 +16,7 @@ export const Home = () => {
                 <IntroContent />
                 <GetActualPriceContent />
                 <GetHistoryPriceContent />
+                <CompareStocksContent/>
             </Container>
         </>
 
