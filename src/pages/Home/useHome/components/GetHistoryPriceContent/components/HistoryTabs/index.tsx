@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, List, ListItem, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, List, ListItem, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { theme } from '../../../../../../../styles/theme'
 import { IFormControlContentProps, IHistoryItem, IHomeDuckInitialState } from '../../../../../../../types/interface'
@@ -19,12 +19,23 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
     ]
     const dispatch = useDispatch();
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
-
+    const toast = useToast()
     useEffect(() => {
         if (modeRequest) dispatch(HomeActions.getHistoryStockRequest({ symbol: selectedStock, mode: modeRequest }))
     }, [modeRequest])
     // getHistoryStock
     const returnItems = () => {
+        if (homeData?.historyData?.Note) {
+            toast({
+                title: homeData.historyData.Note,
+                status: 'error',
+                isClosable: true,
+            })
+            dispatch(HomeActions.getStocksReset())
+            dispatch(HomeActions.resetHistoryData())
+            props.setSelectedStock('')
+            return []
+        }
         const items: IHistoryItem[] = Object.values(homeData?.historyData?.[`${tag}`])
         const keys = Object.keys(homeData?.historyData?.[`${tag}`])
         let i;
