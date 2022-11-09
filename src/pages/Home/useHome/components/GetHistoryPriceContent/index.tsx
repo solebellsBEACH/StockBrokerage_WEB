@@ -7,7 +7,6 @@ import { theme } from '../../../../../styles/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as HomeActions } from '../../../../../store/ducks/home'
 import { IHomeDuckInitialState } from '../../../../../types/interface';
-import { CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import { FormControlContent } from './components/FormControlContent';
 import { HistoryTabs } from './components/HistoryTabs';
 
@@ -16,7 +15,6 @@ export const GetHistoryPriceContent = () => {
     const dispatch = useDispatch();
     const homeData = useSelector((state: { home: IHomeDuckInitialState }) => state.home)
     const [selectedStock, setSelectedStock] = useState('')
-    console.log(selectedStock)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const blockName = 'getHistoryPrice'
 
@@ -37,7 +35,6 @@ export const GetHistoryPriceContent = () => {
 
 
     const handleGetHistoryPrice = () => {
-        // dispatch(HomeActions.getActualPriceRequest({ name: stock }))
         onOpen()
     }
 

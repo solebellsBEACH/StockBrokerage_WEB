@@ -4,6 +4,7 @@ import { Creators as HomeActions, Types as HomeTypes } from '../../ducks/home';
 
 function* getActualPrice(props: { type: string, payload: { name: string } }): any {
   const { name } = props.payload
+  console.log(props)
   try {
     const response = yield call(api.get, `stock/${name}/quote`);
     if (response.status === 200) {
@@ -21,7 +22,6 @@ function* getStocks(props: { type: string, payload: { name: string } }): any {
   const { name } = props.payload
   try {
     const response = yield call(apiAlpha.get, `query?function=SYMBOL_SEARCH&keywords=${name}&apikey=${alphaKey}`);
-    console.log(response)
     if (response.status === 200) {
       yield put(HomeActions.getStocksSuccess(
         response.data
@@ -33,6 +33,26 @@ function* getStocks(props: { type: string, payload: { name: string } }): any {
     yield put(HomeActions.getStocksFail());
   }
 }
+function* getHistoryStock(props: { type: string, payload: { symbol: string, mode: string } }): any {
+  const { symbol, mode } = props.payload
+  try {
+    const response = yield call(apiAlpha.get, `query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${alphaKey}`);
+    if (response.status === 200) {
+      yield put(HomeActions.getHistoryStockSuccess(
+        response.data
+      ));
+    } else {
+      yield put(HomeActions.getHistoryStockFail());
+    }
+  } catch (error) {
+    yield put(HomeActions.getHistoryStockFail());
+  }
+}
+
+function* getHistoryStockWatcher() {
+  yield takeLatest(HomeTypes.GET_HISTORY_DATA_REQUEST, getHistoryStock);
+}
+
 
 function* getStocksWatcher() {
   yield takeLatest(HomeTypes.GET_STOCKS_REQUEST, getStocks);
@@ -47,5 +67,6 @@ export default function* rootSagas() {
   yield all([
     fork(getActualPriceWatcher),
     fork(getStocksWatcher),
+    fork(getHistoryStockWatcher),
   ]);
 }

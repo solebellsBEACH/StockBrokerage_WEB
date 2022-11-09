@@ -22,9 +22,8 @@ export const GetActualPriceContent = (props: any) => {
     const stockNameOnChange = (e: string) => {
         setStock(e)
     }
-    console.log(homeData)
     useEffect(() => {
-        dispatch(HomeActions.getActualPriceRequest({ name: selectedStock }))
+        if (selectedStock.length !== 0) dispatch(HomeActions.getActualPriceRequest({ name: selectedStock }))
     }, [isOpen])
 
     const handleSearch = () => {
@@ -41,7 +40,6 @@ export const GetActualPriceContent = (props: any) => {
         dispatch(HomeActions.getStocksReset())
     }
     const handleGetActualPrice = () => {
-        // dispatch(HomeActions.getActualPriceRequest({ name: stock }))
         onOpen()
     }
     return (

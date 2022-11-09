@@ -69,15 +69,6 @@ export const FormControlContent = (props: IFormControlContentProps) => {
                         </SimpleGrid>
                     </RadioGroup>
                 </Box>}
-
-            <Button
-                width='100%'
-                color='white'
-                onClick={handleGetHistoryPrice}
-                disabled={selectedStock.length === 0}
-                backgroundColor={theme.templateColor3} marginTop={2} variant='solid'>
-                Buscar preço histórico!
-            </Button>
             <FormHelperText
                 color='white'
             >Click no botão para realizar a consulta.</FormHelperText>

@@ -1,15 +1,23 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { theme } from '../../../../../../../styles/theme'
 import { IFormControlContentProps } from '../../../../../../../types/interface'
+import { Creators as HomeActions } from '../../../../../../../store/ducks/home'
+import { useDispatch } from 'react-redux'
 
 export const HistoryTabs = (props: IFormControlContentProps) => {
     const { selectedStock } = props
     const tabs = [
-        { name: 'Semanalmente' },
-        { name: 'Mensalmente' },
-        { name: 'Diariamente' }
+        { name: 'Semanalmente', mode: 'week' },
+        { name: 'Mensalmente', mode: 'week' },
+        { name: 'Diariamente', mode: 'week' }
     ]
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(HomeActions.getHistoryStockRequest({ symbol: selectedStock, mode: 'week' }))
+    }, [])
+    // getHistoryStock
+
     return (
         <Box
             margin={2}
@@ -38,7 +46,7 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
                 colorScheme='white'
                 variant='enclosed'>
                 <TabList>
-                    {tabs.map(e => <Tab>{e.name}</Tab>)}
+                    {tabs.map(e => <Tab key={'tabs' + e.name}>{e.name}</Tab>)}
                 </TabList>
                 <TabPanels>
                     <TabPanel>

@@ -3,7 +3,8 @@ export interface IHomeDuckInitialState {
     error: boolean
     actualPriceData: IGetActualPricePayload | null
     stocks: IStock[] | null,
-    onFocusBlock: 'intro' | 'getActualPrice' | 'getHistoryPrice'
+    onFocusBlock: 'intro' | 'getActualPrice' | 'getHistoryPrice',
+    historyData: any|null
 }
 
 export interface IGetActualPricePayload {
@@ -12,6 +13,23 @@ export interface IGetActualPricePayload {
     pricedAt: string
 }
 
+export interface IHistoryData {
+    ["Meta Data"]: {
+        ["1. Information"]: string,
+        ["2. Symbol"]: string,
+        ["3. Last Refreshed"]: string,
+        ["4. Time Zone"]: string
+    },
+    ["Weekly Time Series"]: IHistoryItem[]
+
+}
+export interface IHistoryItem {
+    ["1. open"]: string,
+    ["2. high"]: string,
+    ["3. low"]: string,
+    ["4. close"]: string,
+    ["5. volume"]: string
+}
 export interface IStock {
     ["1. symbol"]: string,
     ["2. name"]: string,
