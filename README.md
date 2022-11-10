@@ -3,13 +3,15 @@
 https://user-images.githubusercontent.com/62174352/200976660-b86ce573-a1a0-4ac3-aafd-ab4cc2149db9.mp4
 
 ## Instruções para rodar o projeto em desenvolvimento
-#### 1. `git clone https://github.com/solebellsBEACH/StockBrokerage_WEB.git`  para clonar o repositório
+#### 1. Rode o backEnd em http://localhost:3001/
 
-#### 2. `cd StockBrokerage_WEB/`
+#### 2. `git clone https://github.com/solebellsBEACH/StockBrokerage_WEB.git`  para clonar o repositório
 
-#### 3. `yarn` para rodar as dependências
+#### 3. `cd StockBrokerage_WEB/`
 
-#### 4. `yarn dev`
+#### 4. `yarn` para rodar as dependências
+
+#### 5. `yarn dev`
 
 ## Testes Automatizados
 
