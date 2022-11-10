@@ -9,8 +9,9 @@ background-color:${props => props.theme.templateColor3};
 display:flex;
 justify-content: center;
 align-items: center;
-padding:0 2rem;
-@media(max-width:600px){flex-direction:column}
+padding:2rem 0;
+@media(max-width:600px){flex-direction:column;
+    padding:0 2rem;}
 `
 
 export const ThanksIcon = styled(Lottie)`
