@@ -1,4 +1,4 @@
 {
-    "name":"Verificar preço atual da ação",
-    "description":"Digite o nome da ação que deseja procurar para saber o valor do preço atual da ação"
+    "name":"Comparar ações",
+    "description":"Digite o nome das ações que deseja comparar"
 }

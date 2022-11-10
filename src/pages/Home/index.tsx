@@ -7,6 +7,7 @@ import {
     GetHistoryPriceContent,
     IntroContent
 } from './useHome/components'
+import { Footer } from './useHome/components/Footer'
 
 export const Home = () => {
     return (
@@ -17,6 +18,7 @@ export const Home = () => {
                 <GetActualPriceContent />
                 <GetHistoryPriceContent />
                 <CompareStocksContent/>
+                <Footer/>
             </Container>
         </>
 
