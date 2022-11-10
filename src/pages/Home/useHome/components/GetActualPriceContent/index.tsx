@@ -69,10 +69,11 @@ export const GetActualPriceContent = (props: any) => {
                                 display='flex'
                                 flexDirection='row'
                             >
-                                <Input placeholder='Nome da ação...' value={stock} onChange={e => stockNameOnChange(e.target.value)} />
+                                <Input placeholder='Nome da ação...' id='cypress-GetActualPriceContent-INPUT' value={stock} onChange={e => stockNameOnChange(e.target.value)} />
                                 <Button
                                     disabled={stock.length === 0}
                                     onClick={handleSearch}
+                                    id='cypress-GetActualPriceContent-SEARCH-BUTTON'
                                     backgroundColor={theme.templateColor3} marginLeft={2} leftIcon={!homeData.loading ? <SearchIcon color='white' /> : <></>} variant='solid'>{homeData.loading && <Spinner color='white' />}</Button>
                             </Box>
                             {homeData?.stocks?.length === 0 && <Box
@@ -105,12 +106,13 @@ export const GetActualPriceContent = (props: any) => {
                                     <RadioGroup onChange={setSelectedStock} value={selectedStock}>
                                         <SimpleGrid
                                             columns={[1]} spacing={2}
-                                        >{homeData.stocks.map((e, i) => <WrapItem key={'stocks' + i}><Radio value={e['1. symbol']}>{e['2. name']}</Radio></WrapItem>)}
+                                        >{homeData.stocks.map((e, i) => <WrapItem  key={'stocks' + i}><Radio id={'cypress-GetActualPriceContent-'+i} value={e['1. symbol']}>{e['2. name']}</Radio></WrapItem>)}
                                         </SimpleGrid>
                                     </RadioGroup>
                                 </Box>}
                             <Button
                                 width='100%'
+                                id='cypress-GetActualPriceContent-BUSCAR-ATUAL'
                                 color='white'
                                 onClick={handleGetActualPrice}
                                 disabled={selectedStock.length === 0}

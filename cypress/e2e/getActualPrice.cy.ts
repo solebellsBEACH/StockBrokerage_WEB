@@ -5,11 +5,12 @@ describe('Testando a getActualPrice', () => {
     it('Preenchendo campos', () => {
       //Pegando campos de Login
   
-    //   cy.get('#name-field').type('Lucas Xavier');
-    //   cy.get('#cpf-field').type('11111111100');
-    //   cy.get('#phone-field').type('27995260672');
-    //   cy.get('#email-field').type('lucassxxavier@gmail.com');
-    //   cy.get('#submit-button').click();
+      cy.get('#cypress-GetActualPriceContent-INPUT').type('coca');
+      cy.get('#cypress-GetActualPriceContent-SEARCH-BUTTON').click();
+      cy.get('[type="radio"]').first().check({force: true})
+      cy.get('#cypress-GetActualPriceContent-BUSCAR-ATUAL').click();
+    //   cy.get('#cypress-GetActualPriceContent-FECHAR-MODAL').click();
+    ;
     });
   })
   

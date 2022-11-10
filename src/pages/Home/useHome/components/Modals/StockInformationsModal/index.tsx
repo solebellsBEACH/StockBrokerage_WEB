@@ -41,7 +41,9 @@ export const StockInformationsModal = (props: IStockInformationsModalProps) => {
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button colorScheme='blue' mr={3} onClick={onClose}>
+                                <Button
+                                 id='cypress-GetActualPriceContent-FECHAR-MODAL'
+                                colorScheme='blue' mr={3} onClick={onClose}>
                                     Fechar
                                 </Button>
                             </ModalFooter>
