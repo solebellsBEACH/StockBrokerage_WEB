@@ -42,6 +42,7 @@ export const CompareStocksContent = () => {
                             flexDirection='column'
                         >
                             <StyledAutocomplete
+                            id='cypress-CompareStocksContent-INPUT'
                                 options={stocksToCompare}
                                 result={result}
                                 setResult={(options: Option[]) => setResult(options)}
@@ -50,6 +51,7 @@ export const CompareStocksContent = () => {
                                 renderBadge={(option) => {
                                     return <Button
                                         marginRight={1}
+                                        
                                         rightIcon={<CloseIcon w={10} h={10} />}
                                         marginBottom={1}
                                         color={theme.templateColor1}>{option.label}</Button>
@@ -57,6 +59,7 @@ export const CompareStocksContent = () => {
                             />
                             <Button
                                 width='80%'
+                                id='cypress-CompareStocksContent-BUTTON'
                                 disabled={result.length < 2}
                                 onClick={() => { dispatch(HomeActions.getCompareStocksRequest({ stocks: result })) }}
                                 marginTop={2} color='white' backgroundColor={theme.templateColor5}>{homeData.loading ? <Spinner size='md' color='white' /> : <>Comparar ações <SearchIcon marginLeft={30} w={20} h={20} /></>}</Button>
