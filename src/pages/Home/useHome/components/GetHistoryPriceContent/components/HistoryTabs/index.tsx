@@ -87,8 +87,9 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
                 >{selectedStock} </Box>{name}
             </Box>
             {!tag && <ContentButtons>
-                {tabs.map(e => {
+                {tabs.map((e, i)=> {
                     return <Button
+                    id={'cypress-GetHistoryPrice-MODE-BUTTON'+i}
                         onClick={() => {
                             setTag(e.tag)
                             setModeRequest(e.mode)
@@ -115,6 +116,7 @@ export const HistoryTabs = (props: IFormControlContentProps) => {
             </Box>
             {tag && <Button
                 marginTop={4}
+                id='cypress-GetHistoryPrice-CLOSE-BUTTON'
                 marginBottom={2}
                 onClick={handleResetProps}
                 w={10} h={10}

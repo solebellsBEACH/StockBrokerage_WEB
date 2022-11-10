@@ -29,8 +29,9 @@ export const FormControlContent = (props: IFormControlContentProps) => {
                 display='flex'
                 flexDirection='row'
             >
-                <Input placeholder='Nome da ação...' value={stock} onChange={e => stockNameOnChange(e.target.value)} />
+                <Input placeholder='Nome da ação...' id='cypress-GetHistoryPrice-INPUT'value={stock} onChange={e => stockNameOnChange(e.target.value)} />
                 <Button
+                id='cypress-GetHistoryPrice-SEARCH-BUTTON'
                     disabled={stock.length === 0}
                     onClick={handleSearch}
                     backgroundColor={theme.templateColor5} marginLeft={2} leftIcon={!homeData.loading ? <SearchIcon color='white' /> : <></>} variant='solid'>{homeData.loading && <Spinner color='white' />}</Button>
